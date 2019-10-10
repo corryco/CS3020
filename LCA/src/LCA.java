@@ -1,3 +1,4 @@
+import BinaryTree
 
 public class LCA 
 {

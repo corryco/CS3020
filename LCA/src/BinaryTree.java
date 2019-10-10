@@ -1,4 +1,6 @@
-import LCA.TreeNode;
+import java.util.LinkedList;
+import java.util.Queue; 
+//import LCA.TreeNode;
 
 public class BinaryTree 
 {
@@ -20,12 +22,12 @@ public class BinaryTree
 		}
 	}
 
-	public static void printLevelOrder(Node root) 
+	public static void printLevelOrder(TreeNode root) 
 	{
 		if (root == null)
 			return;
 
-		Queue < Node > q = new LinkedList < Node > ();
+		Queue < TreeNode > q = new LinkedList < TreeNode > ();
 
 		q.add(root);
 	
@@ -37,17 +39,20 @@ public class BinaryTree
 
 			while (nodeCount > 0)
 			{
-				Node node = q.peek();
+				TreeNode node = q.peek();
 				System.out.print("(" + node.data + ")");
 
 				q.remove();
 	
 		        if (node.left != null)
 		            q.add(node.left);
+		        
 		        if (node.right != null)
 		            q.add(node.right);
-		        if (node.depth != null)
-		            System.out.print(" ");
+		        
+		        //if (node.depth != null)
+		        //    System.out.print(" ");
+		       
 		        if (nodeCount > 1)
 		        {
 		            System.out.print(", ");
@@ -59,5 +64,4 @@ public class BinaryTree
 			System.out.println();
 		}
 	}
-
 }
