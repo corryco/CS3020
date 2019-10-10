@@ -23,9 +23,10 @@ public class LCA
 			return null;
 		
 		// If root = either input note - return root
-			if(root.data == a.data || root.data == b.data )
-				return root;
+		if(root.data == a.data || root.data == b.data )
+			return root;
 		
+		return root;
 	}
 	
 	public static TreeNode lowestCommonAncestorRecursive(TreeNode root, TreeNode a, TreeNode b) 
@@ -41,15 +42,14 @@ public class LCA
 		TreeNode left=lowestCommonAncestorRecursive(root.left,a,b);
 		TreeNode right=lowestCommonAncestorRecursive(root.right,a,b);
 	 
-		// If we get left and right not null , it is lca for a and b
+		// If we get left and right not null , it is LCA for a and b
 		if(left!=null && right!=null)
 				return root;
 			
-		
 		if(left== null)
 			return right;
 		else
-		return left;
+			return left;
 	 
 	}
 	
@@ -61,6 +61,45 @@ public class LCA
 		
 	}
 	
+	public static void printLevelOrder(Node root) 
+	{
+		if (root == null)
+			return;
+
+		Queue < Node > q = new LinkedList < Node > ();
+
+		q.add(root);
+	
+		while (true)
+		{
+			int nodeCount = q.size();
+			if (nodeCount == 0)
+				break;
+
+			while (nodeCount > 0)
+			{
+				Node node = q.peek();
+				System.out.print("(" + node.data + ")");
+
+				q.remove();
+	
+		        if (node.left != null)
+		            q.add(node.left);
+		        if (node.right != null)
+		            q.add(node.right);
+		        if (node.depth != null)
+		            System.out.print(" ");
+		        if (nodeCount > 1)
+		        {
+		            System.out.print(", ");
+		        }
+	
+		        nodeCount--;
+		    }
+			
+			System.out.println();
+		}
+	}
 	public static void main(String[] args)
 	{
 	// Creating a binary tree
