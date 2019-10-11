@@ -12,7 +12,7 @@ public class LCA
 		// If root = either input note - return root
 		if(root.data == a.data || root.data == b.data )
 			return root;
-		
+
 		return root;
 	}
 	
@@ -37,9 +37,8 @@ public class LCA
 			return right;
 		else
 			return left;
-	 
 	}
-	
+
 	public static TreeNode createRandomBinaryTree()
 	{
 		TreeNode rootNode =new TreeNode(40);
@@ -49,21 +48,23 @@ public class LCA
 	}
 	
 	public static void main(String[] args)
-	{
-	// Creating a binary tree
-	TreeNode rootNode=createRandomBinaryTree();
-	System.out.println("Lowest common ancestor for node 5 and 30:");
-			
-	TreeNode node5=new TreeNode(5);
-	TreeNode node30=new TreeNode(30);
-			
-	System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).data);
+	{	
+		// Creating a binary tree
+		TreeNode rootNode=createRandomBinaryTree();
+
+				
+		TreeNode node5 = new TreeNode(5);
+		TreeNode node30 = new TreeNode(30);
+				
+//		System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).data);
 	 
 	} 
 }	
 
 
 /*		
+System.out.println("Lowest common ancestor for node 5 and 30:");
+
 TreeNode node20=new TreeNode(20);
 TreeNode node10=new TreeNode(10);
 TreeNode node30=new TreeNode(30);
