@@ -1,10 +1,7 @@
-import BinaryTree
 
 public class LCA 
 {
 
-	 
-	
 	public static TreeNode lowestCommonAncestorIterative(TreeNode root, TreeNode a, TreeNode b) 
 	{	
 		

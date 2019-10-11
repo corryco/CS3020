@@ -1,27 +1,10 @@
 import java.util.LinkedList;
 import java.util.Queue; 
 //import LCA.TreeNode;
+//import BinaryTree.TreeNode;
 
 public class BinaryTree 
 {
-
-	public static class TreeNode
-	{
-		int data;
-		TreeNode left;
-		TreeNode right;
-	
-		TreeNode(int data)
-		{
-			this.data=data;
-		}
-		
-		int getTreeNode(int data)
-		{
-			return this.data;
-		}
-	}
-
 	public static void printLevelOrder(TreeNode root) 
 	{
 		if (root == null)
