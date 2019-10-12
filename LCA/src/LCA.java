@@ -13,6 +13,8 @@ public class LCA
 		if(root.data == a.data || root.data == b.data )
 			return root;
 
+//FIX 
+		
 		return root;
 	}
 	
@@ -30,6 +32,7 @@ public class LCA
 		TreeNode right=lowestCommonAncestorRecursive(root.right,a,b);
 	 
 		// If we get left and right not null , it is LCA for a and b
+		
 		if(left!=null && right!=null)
 				return root;
 			

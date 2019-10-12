@@ -21,6 +21,7 @@ public class BinaryTree
 			if (nodeCount == 0)
 				break;
 
+			
 			while (nodeCount > 0)
 			{
 				TreeNode node = q.peek();
