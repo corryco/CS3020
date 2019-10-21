@@ -42,24 +42,27 @@ public class LCA
 			return left;
 	}
 
-	public static TreeNode createRandomBinaryTree()
+	public static TreeNode createRandomBinaryTree(int randomData[])
 	{
-		TreeNode rootNode =new TreeNode(40);
+		TreeNode rootNode =new TreeNode(randomData.length);
 			
-		return rootNode;
-		
+		for(int i=0;i<randomData.length;i++)
+		{
+			rootNode.add(randomData[i]);
+		}
+ 		return rootNode;		
 	}
 	
 	public static void main(String[] args)
 	{	
 		// Creating a binary tree
-		TreeNode rootNode=createRandomBinaryTree();
+		int randomData[] = {43,887,11,3,8,33,6,0,46,32,78,76,334,45};
+		TreeNode rootNode=createRandomBinaryTree(randomData);
 
+		TreeNode node5 = new TreeNode(11);
+		TreeNode node30 = new TreeNode(76);
 				
-		TreeNode node5 = new TreeNode(5);
-		TreeNode node30 = new TreeNode(30);
-				
-//		System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).data);
+		System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).data);
 	 
 	} 
 }	
