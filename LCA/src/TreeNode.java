@@ -1,28 +1,27 @@
 
-public class TreeNode
+public class TreeNode< A extends Comparable>
 {
-	int iValue;
-
-	TreeNode nLeft;
-	TreeNode nRight;
+	A value;
+	TreeNode<A> nLeft;
+	TreeNode<A> nRight;
 	
 	// Constructor - Creates root Node 
-	TreeNode(int iValue)
+	TreeNode(A value)
 	{
-		this.iValue = iValue;
+		this.value = value;
 		nLeft = nRight = null;
 	}
 	
 	// Get Node iValue 
-	int getTreeNode(int iValue)
+	A getTreeNode(A value)
 	{
-		return this.iValue;
+		return this.value;
 	}
 
 	// Set Node iValue 
-	public void setTreeNode(int iValue)
+	public void setTreeNode(A value)
 	{
-		this.iValue = iValue;
+		this.value = value;
 	}
 
 	public void print() 
@@ -35,7 +34,7 @@ public class TreeNode
     {
         if (n != null) 
         {
-            System.out.println (prefix + (isnLeft ? "|-- " : "\\-- ") + n.iValue);
+            System.out.println (prefix + (isnLeft ? "|-- " : "\\-- ") + n.value);
             print(prefix + (isnLeft ? "|   " : "    "), n.nLeft, true);
             print(prefix + (isnLeft ? "|   " : "    "), n.nRight, false);
         }

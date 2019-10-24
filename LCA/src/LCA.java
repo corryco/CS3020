@@ -57,6 +57,7 @@ public class LCA
 	{	
 		// Creating a random binary tree
 		int randomData[] = {43,887,11,3,8,33,6,0,46,32,78,76,334,45};
+
 		TreeNode rootNode=createRandomBinaryTree(randomData);
 
 		TreeNode node5 = new TreeNode(11);
