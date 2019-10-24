@@ -15,12 +15,14 @@ public class LCSBinaryTree {
 
 	private Node n1,n2;
  
- public static void main(String args[]){
+ public static void main(String args[])
+ {
   LCSBinaryTree nodeFinder = new LCSBinaryTree();
   nodeFinder.find();
  }
  
- public void find(){
+ public void find()
+ {
   Tree t = getSampleTree();
   Node commonParent = findCommonParent(t,n1,n2);
   if(commonParent == null){
@@ -67,9 +69,3 @@ public class LCSBinaryTree {
 //Common Parent for 43 and 334 is null
 //Common Parent for 6 and 334 is 43
 //Common Parent for 76 and 334 is 46
-
-
-
-       
-
- 

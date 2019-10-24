@@ -4,13 +4,12 @@ public class LCA
 
 	public static TreeNode lowestCommonAncestorIterative(TreeNode root, TreeNode a, TreeNode b) 
 	{	
-		
 		//If node is null, return null
 		if(root == null)
 			return null;
 		
 		// If root = either input note - return root
-		if(root.data == a.data || root.data == b.data )
+		if(root.iValue == a.iValue || root.iValue == b.iValue )
 			return root;
 
 //FIX 
@@ -25,11 +24,11 @@ public class LCA
 			return null;
 	
 		// If root = either input note - return root
-		if(root.data == a.data || root.data == b.data )
+		if(root.iValue == a.iValue || root.iValue == b.iValue )
 			return root;
 	 
-		TreeNode left=lowestCommonAncestorRecursive(root.left,a,b);
-		TreeNode right=lowestCommonAncestorRecursive(root.right,a,b);
+		TreeNode left=lowestCommonAncestorRecursive(root.nLeft,a,b);
+		TreeNode right=lowestCommonAncestorRecursive(root.nRight,a,b);
 	 
 		// If we get left and right not null , it is LCA for a and b
 		
@@ -46,23 +45,24 @@ public class LCA
 	{
 		TreeNode rootNode =new TreeNode(randomData.length);
 			
-		for(int i=0;i<randomData.length;i++)
+		for(int i=0; i<randomData.length; i++)
 		{
 			rootNode.add(randomData[i]);
 		}
  		return rootNode;		
 	}
+
 	
 	public static void main(String[] args)
 	{	
-		// Creating a binary tree
+		// Creating a random binary tree
 		int randomData[] = {43,887,11,3,8,33,6,0,46,32,78,76,334,45};
 		TreeNode rootNode=createRandomBinaryTree(randomData);
 
 		TreeNode node5 = new TreeNode(11);
 		TreeNode node30 = new TreeNode(76);
 				
-		System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).data);
+		System.out.println(lowestCommonAncestorRecursive(rootNode,node5,node30).iValue);
 	 
 	} 
 }	
@@ -81,15 +81,15 @@ TreeNode node5=new TreeNode(5);
 TreeNode node45=new TreeNode(45);
 TreeNode node55=new TreeNode(55);
 
-rootNode.left=node20;
-rootNode.right=node60;
+rootNode.nLeft=node20;
+rootNode.nRight=node60;
 
-node20.left=node10;
-node20.right=node30;
+node20.nLeft=node10;
+node20.nRight=node30;
 
-node60.left=node50;
-node60.right=node70;
+node60.nLeft=node50;
+node60.nRight=node70;
 
-node10.left=node5;
-node50.right=node55;
+node10.nLeft=node5;
+node50.nRight=node55;
 */

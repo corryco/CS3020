@@ -1,35 +1,43 @@
 
 public class TreeNode
 {
-	int data;
-	TreeNode left;
-	TreeNode right;
+	int iValue;
+
+	TreeNode nLeft;
+	TreeNode nRight;
 	
-	// Constructor 
-	TreeNode(int data)
+	// Constructor - Creates root Node 
+	TreeNode(int iValue)
 	{
-		this.data=data;
+		this.iValue = iValue;
+		nLeft = nRight = null;
 	}
 	
-	//Get Node Data 
-	int getTreeNode(int data)
+	// Get Node iValue 
+	int getTreeNode(int iValue)
 	{
-		return this.data;
+		return this.iValue;
 	}
 
-    public void print() 
+	// Set Node iValue 
+	public void setTreeNode(int iValue)
+	{
+		this.iValue = iValue;
+	}
+
+	public void print() 
     {
         print("", this, false);
     }
 
     // Print the Binary Tree - Horizontal
-    public void print(String prefix, TreeNode n, boolean isLeft) 
+    public void print(String prefix, TreeNode n, boolean isnLeft) 
     {
         if (n != null) 
         {
-            System.out.println (prefix + (isLeft ? "|-- " : "\\-- ") + n.data);
-            print(prefix + (isLeft ? "|   " : "    "), n.left, true);
-            print(prefix + (isLeft ? "|   " : "    "), n.right, false);
+            System.out.println (prefix + (isnLeft ? "|-- " : "\\-- ") + n.iValue);
+            print(prefix + (isnLeft ? "|   " : "    "), n.nLeft, true);
+            print(prefix + (isnLeft ? "|   " : "    "), n.nRight, false);
         }
     }
 
