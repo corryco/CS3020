@@ -13,7 +13,7 @@ public class TreeNode< A extends Comparable>
 	}
 	
 	// Get Node iValue 
-	A getTreeNode(A value)
+	public A getTreeNode(A value)
 	{
 		return this.value;
 	}
@@ -30,7 +30,7 @@ public class TreeNode< A extends Comparable>
     }
 
     // Print the Binary Tree - Horizontal
-    public void print(String prefix, TreeNode n, boolean isnLeft) 
+    public void print(String prefix, TreeNode<A> n, boolean isnLeft) 
     {
         if (n != null) 
         {
