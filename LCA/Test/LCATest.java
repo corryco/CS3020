@@ -69,7 +69,7 @@ public class LCATest
         btree.printTree();
 
         //One Node Invalid 
-        iNode1 = 11; iNode2 = 99; 
+        iNode1 = 99; iNode2 = 11; 
         tNode = LCA.lowestCommonAncestorRecursive(btree.getRootNode(), iNode1, iNode2); 
 	    assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is ", null, tNode);
 
