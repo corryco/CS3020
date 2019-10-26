@@ -4,6 +4,12 @@ class TreeNode<T extends Comparable<T>>
     TreeNode<T> nLeft;
     TreeNode<T> nRight;
 
+    public TreeNode() 
+    {
+        this.nLeft = null;
+        this.nRight = null;
+     }
+
     public TreeNode(T value) 
     {
         this.nValue = value;
