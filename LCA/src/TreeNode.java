@@ -1,43 +1,50 @@
-
-public class TreeNode< A extends Comparable>
+class TreeNode<T extends Comparable<T>>
 {
-	A value;
-	TreeNode<A> nLeft;
-	TreeNode<A> nRight;
-	
-	// Constructor - Creates root Node 
-	TreeNode(A value)
-	{
-		this.value = value;
-		nLeft = nRight = null;
-	}
-	
-	// Get Node iValue 
-	public A getTreeNode(A value)
-	{
-		return this.value;
-	}
+    T nValue;
+    TreeNode<T> nLeft;
+    TreeNode<T> nRight;
 
-	// Set Node iValue 
-	public void setTreeNode(A value)
-	{
-		this.value = value;
-	}
-
-	public void print() 
+    public TreeNode(T value) 
     {
-        print("", this, false);
-    }
+        this.nValue = value;
+        this.nLeft = null;
+        this.nRight = null;
+     }
 
-    // Print the Binary Tree - Horizontal
-    public void print(String prefix, TreeNode<A> n, boolean isnLeft) 
-    {
-        if (n != null) 
-        {
-            System.out.println (prefix + (isnLeft ? "|-- " : "\\-- ") + n.value);
-            print(prefix + (isnLeft ? "|   " : "    "), n.nLeft, true);
-            print(prefix + (isnLeft ? "|   " : "    "), n.nRight, false);
-        }
-    }
+     // Set left TreeNode
+     public void setLeft(TreeNode<T> n)
+     {
+         this.nLeft = n;
+     }
 
-}// TreeNode Class 
+     //Set right TreeNode
+     public void setRight(TreeNode<T> n)
+     {
+         this.nRight = n;
+     }
+     
+     // Get left TreeNode
+     public TreeNode<T> getLeft()
+     {
+         return this.nLeft;
+     }
+
+     // Get right TreeNode
+     public TreeNode<T> getRight()
+     {
+         return this.nRight;
+     }
+     
+     // Set TreeNode value
+     public void setData(T value)
+     {
+         this.nValue = value;
+     }
+     
+     // Get note value
+     public T getData()
+     {
+         return this.nValue;
+     } 
+}
+

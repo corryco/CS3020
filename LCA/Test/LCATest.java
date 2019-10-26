@@ -9,18 +9,18 @@ public class LCATest
 	public void testTreeNodeConstructor() 
 	{
 
-		TreeNode temp = new TreeNode(1);
+	//	TreeNode temp = new TreeNode(1);
 
-		assertNotNull("Test the constructor TreeNode :- ", temp);
+	// assertNotNull("Test the constructor TreeNode :- ", temp);
 	}
 
 
 	@Test
 	public void testEmptyTree() {	
 
-		LCA tree = new LCA();
+//		LCA tree = new LCA();
 
-		assertNull("Test LCA for empty tree : ", tree.findLCA(1, 2));
+//		assertNull("Test LCA for empty tree : ", tree.findLCA(1, 2));
 
 	}
 
