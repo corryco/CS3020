@@ -76,26 +76,24 @@ public class BinaryTree<T extends Comparable<T>>
     	return iCounter;
     }
 
-
-	 public void printTree()
-	 {
+	public void printTree() 
+    {
 		 if(root == null)
 			 return;
 
-		 printTree(root);
-	 }
-	 
-	 public void printTree(TreeNode<T> current)
-	 {
-		 if(current.nLeft != null)
-			 printTree(current.nLeft);
+		 printTree("", root, false);
+    }
 
-		 System.out.println(current.getData());
-		 
-		 if(current.nRight!=null)
-			 printTree(current.nRight);
-	 }
-	 
+    // Print the Binary Tree - Horizontal
+    public void printTree(String prefix, TreeNode<T> n, boolean isnLeft) 
+    {
+        if (n != null) 
+        {
+            System.out.println (prefix + (isnLeft ? ">-- " : ">>-- ") + n.getData());
+            printTree(prefix + (isnLeft ? "|   " : "    "), n.nLeft, true);
+            printTree(prefix + (isnLeft ? "|   " : "    "), n.nRight, false);
+        }
+    }
 
 }
 
