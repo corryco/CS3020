@@ -1,5 +1,3 @@
-import static org.junit.Assert.assertEquals;
-
 public class LCA 
 {
 
@@ -14,27 +12,29 @@ public class LCA
 		return btree;
 	}
 
-	public static TreeNode<Integer> lowestCommonAncestorRecursive(TreeNode<Integer> root, int a, int b) 
+	public static TreeNode<Integer> lowestCommonAncestorRecursive(TreeNode<Integer> node, int a, int b) 
 	{
 		//If node is null, return null
-		if(root == null)
+		if(node == null)
 			return null;
 	
 		// If root = either input note - return root
-		if(root.getData() == a || root.getData() == b)
-			return root;
+		if(node.getData() == a || node.getData() == b)
+			return node;
 	 
-		TreeNode<Integer> left=lowestCommonAncestorRecursive(root.nLeft,a,b);
-		TreeNode<Integer> right=lowestCommonAncestorRecursive(root.nRight,a,b);
+		TreeNode<Integer> leftNode=lowestCommonAncestorRecursive(node.nLeft,a,b);
+		TreeNode<Integer> rightNode=lowestCommonAncestorRecursive(node.nRight,a,b);
 	 
-		// If we get left and right not null , it is LCA for a and b
-		if(left!=null && right!=null)
-				return root;
+		// If we get left and right not null, this node is LCA for a and b
+		if(leftNode != null && rightNode != null)
+			return node;
 			
-		if(left== null)
-			return right;
+		if(leftNode != null)
+			return leftNode;
+		else if (rightNode != null)
+			return rightNode;
 		else
-			return left;
+			return null;
 	}
 
 	public static void main(String args[])
@@ -46,7 +46,6 @@ public class LCA
 		btree = createBinaryTree(treeData);
 
         btree.printTree();
-
 
         int iNode1 = 19; 
 	    int iNode2 = 76; 
@@ -86,7 +85,7 @@ public class LCA
         tNode = lowestCommonAncestorRecursive(btree.getRootNode(), iNode1, iNode2); 
 	    System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
 
-        iNode1 = 99; iNode2 = 11; 
+        iNode1 = 999; iNode2 = 11; 
 	    tNode = lowestCommonAncestorRecursive(btree.getRootNode(), iNode1, iNode2); 
 	    if(tNode != null )
 	    	System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
@@ -96,7 +95,12 @@ public class LCA
 	    if(tNode != null )
 	    	System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
 
-        return;
+        iNode1 = 44; iNode2 = 44; 
+	    tNode = lowestCommonAncestorRecursive(btree.getRootNode(), iNode1, iNode2); 
+	    if(tNode != null )
+	    	System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
+
+	    return;
 	}
 	
 }	
