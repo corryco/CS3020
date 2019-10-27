@@ -81,4 +81,90 @@ public class DAGTest
 		assertEquals("Add Invalid Edge - Testing edge count has not increased :", 5, test.getE());
 		assertEquals("Add Invalid Edge - Testing Number of Vertices has not increased : ", 10, test.getV());
 	}
+	
+	@Test
+	public void testsDAGCyclic()
+	{
+		DAG test= new DAG(3);
+		// 0 - 1 - 2 - 0
+		test.addEdge(0, 1);
+		test.addEdge(1, 2);
+		test.addEdge(2, 0);
+		test.findCycle(0);
+		
+		assertTrue("DAG Test Cyclic : ", test.getCycle());
+	}
+
+	@Test
+	public void testsDAGNonCyclic()
+	{
+		DAG test= new DAG(3);
+		// 0 - 1 - 2 - 0
+		test.addEdge(0, 1);
+		test.addEdge(1, 2);
+		test.addEdge(2, 3);
+		test.findCycle(0);
+		
+		assertFalse("DAG Test Non-Cyclic : ", test.getCycle());
+	}
+
+	@Test
+	public void testValidDAGS() 
+	{  
+		DAG test = new DAG(7);
+		test.addEdge(0, 1); 
+		test.addEdge(0, 2); 
+		test.addEdge(1, 3);
+		test.addEdge(2, 4);
+		test.addEdge(4, 5);	
+		test.addEdge(3, 5); 
+		test.addEdge(5, 6); 
+		
+    	int iNode1 = 3; int iNode2 = 5; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", 3, test.findLCA(iNode1, iNode2));
+
+		iNode1 = 4; iNode2 = 6; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", 4, test.findLCA(iNode1, iNode2));
+
+		iNode1 = 1; iNode2 = 4; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", 0, test.findLCA(iNode1, iNode2));
+	}
+
+	@Test
+	public void testDAGSameNode() 
+	{  
+		DAG test = new DAG(7);
+		test.addEdge(0, 1); 
+		test.addEdge(0, 2); 
+		test.addEdge(1, 3);
+		test.addEdge(2, 4);
+		test.addEdge(4, 5);	
+		test.addEdge(3, 5); 
+		test.addEdge(5, 6); 
+		
+    	int iNode1 = 3; int iNode2 = 3; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", 3, test.findLCA(iNode1, iNode2));
+
+		iNode1 = 4; iNode2 = 4; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", 4, test.findLCA(iNode1, iNode2));
+
+	}
+	
+	@Test
+	public void testDAGWithCycle() 
+	{  
+		DAG test = new DAG(6);
+		test.addEdge(0, 1); 
+		test.addEdge(0, 2); 
+		test.addEdge(0, 3);
+		test.addEdge(2, 0);
+		test.addEdge(2, 3);	
+		test.addEdge(2, 4); 
+		test.addEdge(3, 4); 
+		test.addEdge(3, 5); 
+		
+    	int iNode1 = 1; int iNode2 = 4; 
+		assertEquals("LCA of " + iNode1 + " and " + iNode2 + " is : ", -1, test.findLCA(iNode1, iNode2));
+
+	}
 }

@@ -199,9 +199,9 @@ public class DAG
 
 	}
 
-	public boolean hasCycle() 
+	public boolean getCycle() 
 	{
-		return hasCycle;
+		return this.hasCycle;
 	}
 
 	public void findCycle(int v) 
@@ -243,5 +243,40 @@ public class DAG
 
 		//System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
 
+		DAG test = new DAG(7);
+		test.addEdge(0, 1); 
+		test.addEdge(0, 2); 
+		test.addEdge(1, 3);
+		test.addEdge(2, 4);
+		test.addEdge(4, 5);	
+		test.addEdge(3, 5); 
+		test.addEdge(5, 6); 
+    	System.out.println("Add Edge Vertices = [" + test.getV() + "] " + "Edges [" + test.getE() + "] "); 
+
+    	int iNode1 = 3; int iNode2 = 5; 
+		System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + test.findLCA(iNode1, iNode2)); 
+
+		iNode1 = 4; iNode2 = 6; 
+		System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + test.findLCA(iNode1, iNode2)); 
+
+		iNode1 = 1; iNode2 = 4; 
+		System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + test.findLCA(iNode1, iNode2)); 
+
+		iNode1 = 4; iNode2 = 4; 
+		System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + test.findLCA(iNode1, iNode2)); 
+
+		DAG g = new DAG(6);
+		g.addEdge(0, 1);
+		g.addEdge(0, 3); 
+		g.addEdge(0, 4);
+		g.addEdge(3, 4);
+		g.addEdge(1, 0);	
+		g.addEdge(1, 4); 
+		g.addEdge(1, 2);
+		g.addEdge(4, 2);
+		g.addEdge(4, 5);	
+				
+    	iNode1 = 3; iNode2 = 2; 	
+		System.out.println("Multi-LCA of " + iNode1 + " and " + iNode2 + " is " + g.findLCA(iNode1, iNode2)); 
 	}
 }
