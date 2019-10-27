@@ -5,45 +5,31 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
-
-class Node 
-{ 
-    int data; 
-    Node left, right; 
-  
-    Node(int value) { 
-        data = value; 
-        left = right = null; 
-    } 
-} 
 
 public class DAG 
 {
-	private int V; // number of vertices in this digraph
-	private int E; // number of edges in this digraph
-	private ArrayList<Integer>[] adj; // adj[v] = adjacency list for vertex v
-	private int[] indegree; // indegree[v] = indegree of vertex v
-	private boolean marked[]; // Boolean List to track visited vertices
-	private boolean hasCycle; // True if cycle in graph
-	private boolean stack[]; // Order that vertices were visited
-	private int[] edgeTo; // edgeTo[v] = last edge on shortest s->v path
-	private int[] distTo; // distTo[v] = length of shortest s->v path
+	int V; // number of vertices in this digraph
+	int E; // number of edges in this digraph
+	boolean marked[]; // Boolean List to track visited vertices
+	boolean hasCycle; // True if cycle in graph
+	boolean stack[]; // Order that vertices were visited
+	int[] indegree; // indegree[v] = indegree of vertex v
+	ArrayList<Integer>[] adj; // adj[v] = adjacency list for vertex v
 
 	public DAG(int V) 
 	{
 		if (V < 0)
-		throw new IllegalArgumentException("No Vertices");
+			throw new IllegalArgumentException("No Vertices");
 
 		this.V = V;
 		this.E = 0;
-		indegree = new int[this.V];
-		marked = new boolean[this.V];
-		stack = new boolean[this.V];
-		adj = (ArrayList<Integer>[]) new ArrayList[V];
+		this.indegree = new int[V];
+		this.marked = new boolean[V];
+		this.stack = new boolean[V];
+		this.adj = (ArrayList<Integer>[]) new ArrayList[V];
 		
-		for (int v = 0; v < this.V; v++) 
-			adj[v] = new ArrayList<Integer>();
+		for (int i = 0; i < this.V; i++) 
+			this.adj[i] = new ArrayList<Integer>();
 
 		return;
 	}
@@ -59,16 +45,10 @@ public class DAG
 		return E;
 	}
 
-	public Object DirAcycGraph(Node root) 
-	{
-		Object dirAcycGraph = new Object();
-		return dirAcycGraph;
-	}
-
 	// Adds a directed edge from v->w
 	public int addEdge(int v, int w) 
 	{
-		if ((validateVertex(v) < 0) || (validateVertex(w) < 0)) 
+		if (!validVertex(v) || !validVertex(w) ) 
 			return -1;
 		
 		adj[v].add(w);
@@ -78,30 +58,21 @@ public class DAG
 		return E;
 	}
 
-	private int validateVertex(int v) 
+	private boolean validVertex(int v) 
 	{
-		if (v < 0 || v >= V)
-			return -1;
-		else
-			return 1;
+		return (v < 0 || v >= V) ? false : true;
 	}
 
 	// Returns amount of directed edges incident to vertex v
 	public int indegree(int v) 
 	{
-		if (validateVertex(v) < 0) 
-			return -1;
-		else 
-			return indegree[v];
+		return validVertex(v) ? indegree[v] : -1;
 	}
-
+	
 	// Returns amount of directed edges from vertex v
 	public int outdegree(int v) 
 	{
-		if (validateVertex(v) < 0)
-			return -1;
-		else 
-			return adj[v].size();
+		return validVertex(v) ? adj[v].size() : -1;
 	}
 
 	// Returns the adjacent vertices to v
@@ -112,19 +83,20 @@ public class DAG
 
 	public int findLCA(int v, int w) 
 	{
+		boolean found = false;
+
 		findCycle(0);
 	
 		if (hasCycle) // Graph is not a DAG
 			return -1;
 
-		// Reverse the dag, allows easier traversal
+		//LCA comes before the two nodes - traverse the graph backwards
 		DAG backwards = reverse();
 
 		// Locate the two points in the graph
 		ArrayList<Integer> vPath = backwards.BFS(v);
 		ArrayList<Integer> wPath = backwards.BFS(w);
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
-		boolean found = false;
 
 		// cycle through the BFS paths, adding all common ancestors to the arrayList
 		// return the first one found, as it is the closest to the nodes.
@@ -140,15 +112,11 @@ public class DAG
 			}
 		}
 		
-		// return -1 in any case where no lca is found (empty dag etc)
-		if (found)
-			return commonAncestors.get(0);
-		else
-			return -1;
+		// return LCA or -1 if no LCA is found
+		return found ? commonAncestors.get(0) : -1;
 	}
 
-	// to find the LCA, will have to traverse the graph backwards as the lca
-	// comes before the two nodes
+	//. Reverse the DAG 
 	public DAG reverse() 
 	{
 		DAG reverse = new DAG(V); // new DAG of same parameter
@@ -156,10 +124,9 @@ public class DAG
 		for (int v = 0; v < V; v++) 
 		{
 			for (int w : adj(v)) 
-			{
 				reverse.addEdge(w, v); // reverse the direction of the edges
-			}
 		}
+
 		return reverse;
 	}
 
@@ -181,8 +148,7 @@ public class DAG
 			order.add(s);
 			
 			// Get all adjacent vertices of the dequeued vertex s
-			// If a adjacent has not been visited, then mark it
-			// visited and enqueue it
+			// If a adjacent has not been visited, then mark it as visited and enqueue it
 			Iterator<Integer> i = adj[s].listIterator();
 			while (i.hasNext()) 
 			{
@@ -196,7 +162,6 @@ public class DAG
 		}
 
 		return order;
-
 	}
 
 	public boolean getCycle() 
