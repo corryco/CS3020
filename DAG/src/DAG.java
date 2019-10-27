@@ -30,9 +30,7 @@ public class DAG
 	public DAG(int V) 
 	{
 		if (V < 0)
-			return;
-
-		//throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+		throw new IllegalArgumentException("No Vertices");
 
 		this.V = V;
 		this.E = 0;
@@ -65,18 +63,16 @@ public class DAG
 	}
 
 	// Adds a directed edge from v->w
-	public void addEdge(int v, int w) 
+	public int addEdge(int v, int w) 
 	{
-		if ((validateVertex(v) > 0) && (validateVertex(w) > 0)) 
-		{
-			adj[v].add(w);
-			indegree[w]++;
-			E++;
-		} 
-		else 
-		{
-			System.out.println("Please enter vertices between 0 & n-1");
-		}
+		if ((validateVertex(v) < 0) || (validateVertex(w) < 0)) 
+			return -1;
+		
+		adj[v].add(w);
+		indegree[w]++;
+		E++;
+			
+		return E;
 	}
 
 	private int validateVertex(int v) 
@@ -227,7 +223,22 @@ public class DAG
 
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
+		DAG dag = new DAG(10);
+		dag.addEdge(1, 2);
+		dag.addEdge(1, 3);
+		dag.addEdge(3, 4);
+		dag.addEdge(4, 5);
+		dag.addEdge(4, 6);
+		
+    	System.out.println("Vertices = [" + dag.getV() + "] " + "Edges [" + dag.getE() + "] "); 
+    	
+    	dag.addEdge(1, 2);
+    	System.out.println("Add Edge Vertices = [" + dag.getV() + "] " + "Edges [" + dag.getE() + "] "); 
+		
+    	dag.addEdge(7, 99);
+    	System.out.println("Add Edge Vertices = [" + dag.getV() + "] " + "Edges [" + dag.getE() + "] "); 
+
+		//System.out.println("LCA of " + iNode1 + " and " + iNode2 + " is " + tNode.getData()); 
 
 	}
 }
