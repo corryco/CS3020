@@ -1,3 +1,9 @@
+// @author Conor Corry
+// Course CS3012 - Task 1. LCA (Lowest Common Ancestor) in a Binary Tree
+// Date: Oct 2019
+
+//class TreeNode: implements a *generic* node
+
 class TreeNode<T extends Comparable<T>>
 {
     T nValue;

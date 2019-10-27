@@ -1,3 +1,7 @@
+// @author Conor Corry
+// Course CS3012 - Task 1. LCA (Lowest Common Ancestor) in a Binary Tree
+// Date: Oct 2019
+
 public class BinaryTree<T extends Comparable<T>> 
 {
 
@@ -8,20 +12,17 @@ public class BinaryTree<T extends Comparable<T>>
 	BinaryTree() 
 	{ 
 		root = null; 
-		
 		return;
 	} 
   
-	BinaryTree(T treeData[]) 
-	{ 
-		root = null; 
-		
+	// Constructor - Create a Binary Tree from a Array of Generic types
+	BinaryTree(T treeData[])
+	{
 		for(int i = 0; i < treeData.length; i++)
-			add(treeData[i]);
-
+				add(treeData[i]);
 		return;
-    } 
-    
+	}
+
 	// return root node 
 	TreeNode<T> getRootNode()
 	{
@@ -90,12 +91,13 @@ public class BinaryTree<T extends Comparable<T>>
 		return iCounter;
 	}
 
-	public void printTree() 
+	public boolean printTree() 
     {
 		 if(root == null)
-			 return;
+			 return false;
 
 		 printTree("", root, false);
+		 return true;
     }
 
     // Print the Binary Tree - Horizontal
@@ -108,4 +110,6 @@ public class BinaryTree<T extends Comparable<T>>
             printTree(prefix + (isnLeft ? "|   " : "    "), n.nRight, false);
         }
     }
+
+
 } // End Class
