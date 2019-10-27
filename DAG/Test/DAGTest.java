@@ -1,33 +1,30 @@
+// @author Conor Corry
+// Course CS3012 - Task 2. DAG (Lowest Common Ancestor) in a DAG
+// Date: Oct 2019
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class DAGTest 
-{
-/*
+{	
 	@Test
-	void testConstructor1() 
+	public void ConstructTest()
 	{
-		DAG dag = new DAG(1);
-		assertEquals("Test Constructor", 1, dag.getV());
+		//Can't make a directed graph with less than 0 vertices
+		DAG test = new DAG(2);
+		assertEquals("Test Constructor", 2, test.getV());
 
-		dag = new DAG(999);
-		assertEquals("Test Constructor", 999, dag.getV());
+		test = new DAG(9999);
+		assertEquals("Test Constructor", 9999, test.getV());
 	}
-*/
-	
-/*	@Test
-	void testConstructor2() 
+
+	@Test(expected=Exception.class)
+	public void InvalidConstrutorTest()
 	{
-		try 
-		{
-			DAG dag = new DAG(-1);
-		} 
-		catch (IllegalArgumentException e) 
-		{
-		}
+		//Can't make a directed graph with less than 0 vertices
+		DAG test = new DAG(-1);
 	}
-*/
 
 	@Test
 	public void testDirectedGraph() 

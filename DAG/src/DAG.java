@@ -1,3 +1,6 @@
+// @author Conor Corry
+// Course CS3012 - Task 2. DAG (Lowest Common Ancestor) in a DAG
+// Date: Oct 2019
 
 import java.util.ArrayList;
 import java.util.Iterator;
