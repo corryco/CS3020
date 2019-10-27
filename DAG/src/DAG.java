@@ -30,47 +30,57 @@ public class DAG
 	public DAG(int V) 
 	{
 		if (V < 0)
-			throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+			return;
+
+		//throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+
 		this.V = V;
 		this.E = 0;
-		indegree = new int[V];
-		marked = new boolean[V];
-		stack = new boolean[V];
+		indegree = new int[this.V];
+		marked = new boolean[this.V];
+		stack = new boolean[this.V];
 		adj = (ArrayList<Integer>[]) new ArrayList[V];
-		for (int v = 0; v < V; v++) {
+		
+		for (int v = 0; v < this.V; v++) 
 			adj[v] = new ArrayList<Integer>();
-		}
+
+		return;
 	}
 
 	// Returns current vertex
-	public int V() 
+	public int getV() 
 	{
 		return V;
 	}
 
-	public int E() 
+	public int getE() 
 	{
 		return E;
 	}
 
-	public Object DirAcycGraph(Node root) {
+	public Object DirAcycGraph(Node root) 
+	{
 		Object dirAcycGraph = new Object();
 		return dirAcycGraph;
 	}
 
 	// Adds a directed edge from v->w
-	public void addEdge(int v, int w) {
-		if ((validateVertex(v) > 0) && (validateVertex(w) > 0)) {
+	public void addEdge(int v, int w) 
+	{
+		if ((validateVertex(v) > 0) && (validateVertex(w) > 0)) 
+		{
 			adj[v].add(w);
 			indegree[w]++;
 			E++;
-		} else {
+		} 
+		else 
+		{
 			System.out.println("Please enter vertices between 0 & n-1");
 		}
-
 	}
 
-	private int validateVertex(int v) {
+	private int validateVertex(int v) 
+	{
 		if (v < 0 || v >= V)
 			return -1;
 		else
@@ -78,34 +88,36 @@ public class DAG
 	}
 
 	// Returns amount of directed edges incident to vertex v
-	public int indegree(int v) {
-		if (validateVertex(v) < 0) {
+	public int indegree(int v) 
+	{
+		if (validateVertex(v) < 0) 
 			return -1;
-		} else {
+		else 
 			return indegree[v];
-		}
 	}
 
 	// Returns amount of directed edges from vertex v
-	public int outdegree(int v) {
-		if (validateVertex(v) < 0) {
+	public int outdegree(int v) 
+	{
+		if (validateVertex(v) < 0)
 			return -1;
-		} else {
+		else 
 			return adj[v].size();
-		}
 	}
 
 	// Returns the adjacent vertices to v
-	public Iterable<Integer> adj(int v) {
+	public Iterable<Integer> adj(int v) 
+	{
 		return adj[v];
 	}
 
-	public int findLCA(int v, int w) {
+	public int findLCA(int v, int w) 
+	{
 		findCycle(0);
-		if (hasCycle) {
-			// Graph is not a DAG
+	
+		if (hasCycle) // Graph is not a DAG
 			return -1;
-		}
+
 		// Reverse the dag, allows easier traversal
 		DAG backwards = reverse();
 
@@ -115,17 +127,20 @@ public class DAG
 		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
 		boolean found = false;
 
-		// cycle through the BFS paths, adding all common ancestors to the
-		// arrayList
+		// cycle through the BFS paths, adding all common ancestors to the arrayList
 		// return the first one found, as it is the closest to the nodes.
-		for (int i = 0; i < vPath.size(); i++) {
-			for (int t = 0; t < wPath.size(); t++) {
-				if (vPath.get(i) == wPath.get(t)) {
+		for (int i = 0; i < vPath.size(); i++) 
+		{
+			for (int t = 0; t < wPath.size(); t++) 
+			{
+				if (vPath.get(i) == wPath.get(t)) 
+				{
 					commonAncestors.add(vPath.get(i));
 					found = true;
 				}
 			}
 		}
+		
 		// return -1 in any case where no lca is found (empty dag etc)
 		if (found)
 			return commonAncestors.get(0);
@@ -135,17 +150,22 @@ public class DAG
 
 	// to find the LCA, will have to traverse the graph backwards as the lca
 	// comes before the two nodes
-	public DAG reverse() {
-		DAG reverse = new DAG(V); // new dag of same parameter
-		for (int v = 0; v < V; v++) {
-			for (int w : adj(v)) {
+	public DAG reverse() 
+	{
+		DAG reverse = new DAG(V); // new DAG of same parameter
+	
+		for (int v = 0; v < V; v++) 
+		{
+			for (int w : adj(v)) 
+			{
 				reverse.addEdge(w, v); // reverse the direction of the edges
 			}
 		}
 		return reverse;
 	}
 
-	public ArrayList<Integer> BFS(int s) {
+	public ArrayList<Integer> BFS(int s) 
+	{
 		// Mark all the vertices as not visited(By default set as false)
 		boolean visited[] = new boolean[V];
 
@@ -155,17 +175,21 @@ public class DAG
 		visited[s] = true;
 		queue.add(s);
 
-		while (queue.size() != 0) {
+		while (queue.size() != 0) 
+		{
 			// Dequeue a vertex from queue and print it
 			s = queue.poll();
 			order.add(s);
+			
 			// Get all adjacent vertices of the dequeued vertex s
 			// If a adjacent has not been visited, then mark it
 			// visited and enqueue it
 			Iterator<Integer> i = adj[s].listIterator();
-			while (i.hasNext()) {
+			while (i.hasNext()) 
+			{
 				int n = i.next();
-				if (!visited[n]) {
+				if (!visited[n]) 
+				{
 					visited[n] = true;
 					queue.add(n);
 				}
@@ -176,25 +200,28 @@ public class DAG
 
 	}
 
-	public boolean hasCycle() {
-
+	public boolean hasCycle() 
+	{
 		return hasCycle;
 	}
 
-	public void findCycle(int v) {
-
+	public void findCycle(int v) 
+	{
 		marked[v] = true;
 		stack[v] = true;
 
-		for (int w : adj(v)) {
-			if (!marked[w]) {
+		for (int w : adj(v)) 
+		{
+			if (!marked[w]) 
+			{
 				findCycle(w);
-			} else if (stack[w]) {
+			} 
+			else if (stack[w]) 
+			{
 				hasCycle = true;
 				return;
 			}
 		}
-
 		stack[v] = false;
 	}
 
