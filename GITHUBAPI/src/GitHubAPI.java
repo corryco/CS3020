@@ -5,7 +5,7 @@ import java.text.MessageFormat;
 
 
 
-import org.eclipse.egit.github.core.Repository;
+import org.elipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.RepositoryService;
 
 public class GitHubAPI 
