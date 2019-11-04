@@ -12,7 +12,8 @@ public class GitHubAPI
 {
 
 	
-	ublic static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException 
+	{
 
 		final String user = "defunkt";
 
@@ -22,13 +23,9 @@ public class GitHubAPI
 
 		RepositoryService service = new RepositoryService();
 
-		for (Repository repo : service.getRepositories(user))
-
-
-			
-			System.out.println(MessageFormat.format(format, count++,
-
-					repo.getName(), repo.getCreatedAt()));
-
+		for(Repository repo : service.getRepositories(user))
+		{
+			System.out.println(MessageFormat.format(format, count++, repo.getName(), repo.getCreatedAt()));
+		}
 	}
 }
