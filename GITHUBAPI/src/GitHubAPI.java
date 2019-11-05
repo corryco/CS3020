@@ -1,6 +1,7 @@
 
 import java.io.IOException;
 import java.net.URL; 
+import java.util.List; 
 
 import org.eclipse.egit.github.core.Repository; 
 import org.eclipse.egit.github.core.RepositoryId; 
@@ -32,7 +33,9 @@ import org.eclipse.egit.github.core.service.IssueService;
 import org.eclipse.egit.github.core.service.LabelService;
 import org.eclipse.egit.github.core.service.MarkdownService;
 import org.eclipse.egit.github.core.service.MilestoneService;
-import org.eclipse.egit.github.core.service.UserService;
+import org.eclipse.egit.github.core.Key; 
+import org.eclipse.egit.github.core.service.UserService; 
+import org.eclipse.egit.github.core.User; 
 
 public class GitHubAPI 
 {
@@ -48,8 +51,6 @@ public class GitHubAPI
 		client = new GitHubClient();
 		client.setCredentials(username, password);
 		
-		String url = "https://github.com/corryco/CS3020.git";
-
 		RepositoryService repoService  = new RepositoryService(client); 
 		UserService serService = new UserService(client);
 		IssueService issueService = new IssueService(client);
@@ -59,6 +60,16 @@ public class GitHubAPI
 		MarkdownService markdownService = new MarkdownService(client);
 		CollaboratorService colaboratorService = new CollaboratorService(client);
 		ContentsService contentsService = new ContentsService(client);
+		
+		
+		UserService service = new UserService(client); 
+		List<User> users = service.getFollowing(); 
+		  for (User user : users) 
+		  { 
+		   int iUserDI = user.getId();
+		   String strLoginId = user.getLogin(); 
+		  } 
+		
 		
 		/*		
 		GitHubClient client = null; 

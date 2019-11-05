@@ -6,20 +6,20 @@ import java.io.IOException;
 import java.util.List; 
 import java.util.Map; 
 import java.util.Map.Entry; 
- 
+import java.util.ArrayList; 
+
 import org.eclipse.egit.github.core.Repository; 
 import org.eclipse.egit.github.core.RepositoryId; 
 import org.eclipse.egit.github.core.User; 
 import org.eclipse.egit.github.core.service.RepositoryService; 
 import org.eclipse.egit.github.core.client.GitHubClient; 
+import org.eclipse.egit.github.core.Commit; 
+import org.eclipse.egit.github.core.CommitUser; 
+import org.eclipse.egit.github.core.Tree; 
 
 import org.junit.Ignore; 
 
-
-
 ///http://www.javased.com/index.php?source_dir=egit-github/org.eclipse.egit.github.core.tests/src/org/eclipse/egit/github/core/tests/live/LiveTest.java
-
-
 
 public class TESTGITHUBAPI 
 {
@@ -115,5 +115,42 @@ public class TESTGITHUBAPI
 		   assertTrue(repo.isFork()); 
 		  } 
 	 } 
+	 /**
+	  * Test default state of commit 
+	  */ 
+	 @Test 
+	 public void defaultState() 
+	 { 
+		Commit commit = new Commit(); 
+		assertNull(commit.getAuthor()); 
+		assertNull(commit.getCommitter()); 
+		assertNull(commit.getMessage()); 
+		assertNull(commit.getParents()); 
+		assertNull(commit.getSha()); 
+		assertNull(commit.getTree()); 
+		assertNull(commit.getUrl()); 
+		assertEquals(0, commit.getCommentCount()); 
+	 } 
 	 
+	 /**
+	  * Test updating commit fields 
+	  */ 
+	 @Test 
+	 public void updateFields() 
+	 { 
+		Commit commit = new Commit(); 
+		CommitUser author = new CommitUser().setName("Art Thor"); 
+		assertEquals(author, commit.setAuthor(author).getAuthor()); 
+		CommitUser committer = new CommitUser().setName("Comb Mitter"); 
+		assertEquals(committer, commit.setCommitter(committer).getCommitter()); 
+		assertEquals("commit message", commit.setMessage("commit message").getMessage()); 
+		assertEquals(new ArrayList<Commit>(), commit.setParents(new ArrayList<Commit>()).getParents()); 
+		assertEquals("abcdef", commit.setSha("abcdef").getSha()); 
+		
+		Tree tree = new Tree(); 
+		tree.setSha("12345"); 
+		assertEquals(tree, commit.setTree(tree).getTree()); 
+		assertEquals("url", commit.setUrl("url").getUrl()); 
+		assertEquals(32, commit.setCommentCount(32).getCommentCount()); 
+	 } 	 
 }
