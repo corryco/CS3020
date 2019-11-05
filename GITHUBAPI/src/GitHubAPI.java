@@ -48,6 +48,8 @@ public class GitHubAPI
 		client = new GitHubClient();
 		client.setCredentials(username, password);
 		
+		String url = "https://github.com/corryco/CS3020.git";
+
 		RepositoryService repoService  = new RepositoryService(client); 
 		UserService serService = new UserService(client);
 		IssueService issueService = new IssueService(client);
