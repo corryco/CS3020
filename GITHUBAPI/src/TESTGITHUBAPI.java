@@ -23,14 +23,13 @@ import org.eclipse.egit.github.core.User;
 
 import org.junit.Ignore; 
 
-///http://www.javased.com/index.php?source_dir=egit-github/org.eclipse.egit.github.core.tests/src/org/eclipse/egit/github/core/tests/live/LiveTest.java
 
+https://stackoverflow.com/questions/46215024/adding-file-to-github-using-java-client-org-eclipse-egit-github-core
+	
 public class TESTGITHUBAPI 
 {
-
 	protected GitHubClient client = null; 
 
-	
 	public void createclientuser()
 	{
 		String username = "corryco";
@@ -55,10 +54,10 @@ public class TESTGITHUBAPI
 		} 
 	}
 		  
-		  
 	@Test 
 	public void fetchCurrentUserUserPWD() throws Exception 
 	{ 
+		client = null;
 		createclientuser();
 		assertNotNull("Test requires user", client.getUser()); 
 
@@ -75,6 +74,7 @@ public class TESTGITHUBAPI
 	@Test 
 	public void fetchCurrentUserToken() throws Exception 
 	{ 
+		client = null;
 		createclienttoken("75add7dbe95ddac306e707ff9d3ed30ba5768612");
 		assertNotNull("Test requires user", client.getUser()); 
 	 
@@ -91,7 +91,8 @@ public class TESTGITHUBAPI
 	@Test 
 	public void fetchCurrentUserURL() throws Exception 
 	{ 
-		createclientURL("https://github.com/corryco/CS3020.git");
+		client = null;
+		createclientURL("https://api.github.com/users/corryco");
 		assertNotNull("Test requires user", client.getUser()); 
 	 
 		UserService service = new UserService(client); 
