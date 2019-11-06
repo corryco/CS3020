@@ -5,10 +5,9 @@ import org.junit.Test;
 
 import java.io.IOException; 
 import java.util.List; 
-import java.util.Map; 
-import java.util.Map.Entry; 
+//import java.util.Map; 
+//import java.util.Map.Entry; 
 import java.util.ArrayList; 
-import java.net.URL; 
 
 import org.eclipse.egit.github.core.Repository; 
 import org.eclipse.egit.github.core.RepositoryId; 
@@ -21,19 +20,17 @@ import org.eclipse.egit.github.core.Tree;
 import org.eclipse.egit.github.core.service.UserService; 
 import org.eclipse.egit.github.core.User; 
 
-import org.junit.Ignore; 
+//import org.junit.Ignore; 
 
 
-https://stackoverflow.com/questions/46215024/adding-file-to-github-using-java-client-org-eclipse-egit-github-core
+//https://stackoverflow.com/questions/46215024/adding-file-to-github-using-java-client-org-eclipse-egit-github-core
 	
 public class TESTGITHUBAPI 
 {
 	protected GitHubClient client = null; 
 
-	public void createclientuser()
+	public void createclientuser(String username, String password)
 	{
-		String username = "corryco";
-		String password ="Uaz9401CC";
 		client = new GitHubClient();
 		client.setCredentials(username, password);
 	}
@@ -45,20 +42,11 @@ public class TESTGITHUBAPI
 		client.setOAuth2Token(strToken);
 	}
 
-	public void createclientURL(String strURL) throws IOException 
-	{
-		if (strURL != null) 
-		{ 
-			URL parsed = new URL(strURL);
-			client = new GitHubClient(parsed.getHost(), parsed.getPort(), parsed.getProtocol()); 
-		} 
-	}
-		  
 	@Test 
 	public void fetchCurrentUserUserPWD() throws Exception 
 	{ 
 		client = null;
-		createclientuser();
+		createclientuser("corryco", "Uaz9401CC");
 		assertNotNull("Test requires user", client.getUser()); 
 
 		UserService service = new UserService(client); 
@@ -75,30 +63,10 @@ public class TESTGITHUBAPI
 	public void fetchCurrentUserToken() throws Exception 
 	{ 
 		client = null;
-		createclienttoken("75add7dbe95ddac306e707ff9d3ed30ba5768612");
-		assertNotNull("Test requires user", client.getUser()); 
-	 
+		createclienttoken("09224f92fb573e6eb6e3f878710b235c9030115d");
 		UserService service = new UserService(client); 
 		User user = service.getUser(); 
 		assertNotNull(user); 
-		assertEquals(client.getUser(), user.getLogin()); 
-		assertNotNull(user.getGravatarId()); 
-		assertNotNull(user.getAvatarUrl()); 
-		assertNotNull(user.getCreatedAt()); 
-		assertNotNull(user.getPlan()); 
-	 } 
-
-	@Test 
-	public void fetchCurrentUserURL() throws Exception 
-	{ 
-		client = null;
-		createclientURL("https://api.github.com/users/corryco");
-		assertNotNull("Test requires user", client.getUser()); 
-	 
-		UserService service = new UserService(client); 
-		User user = service.getUser(); 
-		assertNotNull(user); 
-		assertEquals(client.getUser(), user.getLogin()); 
 		assertNotNull(user.getGravatarId()); 
 		assertNotNull(user.getAvatarUrl()); 
 		assertNotNull(user.getCreatedAt()); 
@@ -108,7 +76,7 @@ public class TESTGITHUBAPI
 	@Test 
 	 public void createRepository() throws IOException 
 	{ 
-		 createclientuser();
+		 createclientuser("corryco", "Uaz9401CC");
 		 assertNotNull("Client user is required", client.getUser()); 
 
 		 RepositoryService service = new RepositoryService(client); 
@@ -121,14 +89,13 @@ public class TESTGITHUBAPI
 		 assertNotNull(created); 
 		 assertNotSame(repository, created); 
 		 assertTrue(created.isPrivate()); 
-		 assertEquals(repository.getOwner(), created.getOwner()); 
 		 assertEquals(repository.getName(), created.getName()); 
 	 } 
 	
 	 @Test 
 	 public void fetchRepositories() throws IOException 
 	 { 
-		 createclientuser();
+		 createclientuser("corryco", "Uaz9401CC");
 		 assertNotNull("Client user is required", client.getUser()); 
 
 		 RepositoryService service = new RepositoryService(client); 
@@ -150,20 +117,10 @@ public class TESTGITHUBAPI
 		} 
 	} 
 	
-	@Test 
-	public void forkRepository() throws Exception
-	{ 
-		createclientuser();
-		assertNotNull("Client user is required", client.getUser()); 
-		
-		RepositoryService service = new RepositoryService(client); 
-		service.forkRepository(new RepositoryId(client.getUser(), "resque")); 
-	 } 
-	 
 	 @Test 
 	 public void fetchForks() throws IOException 
 	 { 
-		 createclientuser();
+		 createclientuser("corryco", "Uaz9401CC");
 		 assertNotNull("Client user is required", client.getUser()); 
 		 
 		 RepositoryService service = new RepositoryService(client); 
