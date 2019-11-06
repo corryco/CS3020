@@ -71,29 +71,5 @@ public class GitHubAPI
 		  } 
 		
 		
-		/*		
-		GitHubClient client = null; 
-		//String url = ("github.test.url");
-		String url = "https://github.com/corryco/CS3020.git";
-
-		if (url != null) 
-		{ 
-				URL parsed = new URL(url); 
-				client = new GitHubClient(parsed.getHost(), parsed.getPort(), 
-				parsed.getProtocol()); 
-		} 
-		else 
-			client = new GitHubClient(); 
-		
-		String user;
-		String password;
-		String writableRepo;
-		 	 
-		 user = System.getProperty("github.test.user"); 
-		 password = System.getProperty("github.test.password"); 
-		 writableRepo = System.getProperty("github.test.repository"); 
-
-		 client.setCredentials(user, password);
-*/
 	}
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map; 
 import java.util.Map.Entry; 
 import java.util.ArrayList; 
+import java.net.URL; 
 
 import org.eclipse.egit.github.core.Repository; 
 import org.eclipse.egit.github.core.RepositoryId; 
@@ -38,13 +39,23 @@ public class TESTGITHUBAPI
 		client.setCredentials(username, password);
 	}
 						
-	public void createclienttoken()
+	public void createclienttoken(String strToken )
 	{
 		//OAuth2 token authentication
-		GitHubClient client = new GitHubClient();
-		client.setOAuth2Token("75add7dbe95ddac306e707ff9d3ed30ba5768612");
+		client = new GitHubClient();
+		client.setOAuth2Token(strToken);
 	}
 
+	public void createclientURL(String strURL) throws IOException 
+	{
+		if (strURL != null) 
+		{ 
+			URL parsed = new URL(strURL);
+			client = new GitHubClient(parsed.getHost(), parsed.getPort(), parsed.getProtocol()); 
+		} 
+	}
+		  
+		  
 	@Test 
 	public void fetchCurrentUserUserPWD() throws Exception 
 	{ 
@@ -64,8 +75,7 @@ public class TESTGITHUBAPI
 	@Test 
 	public void fetchCurrentUserToken() throws Exception 
 	{ 
-	
-		createclienttoken();
+		createclienttoken("75add7dbe95ddac306e707ff9d3ed30ba5768612");
 		assertNotNull("Test requires user", client.getUser()); 
 	 
 		UserService service = new UserService(client); 
@@ -78,7 +88,23 @@ public class TESTGITHUBAPI
 		assertNotNull(user.getPlan()); 
 	 } 
 
-	 @Test 
+	@Test 
+	public void fetchCurrentUserURL() throws Exception 
+	{ 
+		createclientURL("https://github.com/corryco/CS3020.git");
+		assertNotNull("Test requires user", client.getUser()); 
+	 
+		UserService service = new UserService(client); 
+		User user = service.getUser(); 
+		assertNotNull(user); 
+		assertEquals(client.getUser(), user.getLogin()); 
+		assertNotNull(user.getGravatarId()); 
+		assertNotNull(user.getAvatarUrl()); 
+		assertNotNull(user.getCreatedAt()); 
+		assertNotNull(user.getPlan()); 
+	 } 
+
+	@Test 
 	 public void createRepository() throws IOException 
 	{ 
 		 createclientuser();
@@ -87,7 +113,7 @@ public class TESTGITHUBAPI
 		 RepositoryService service = new RepositoryService(client); 
 		 Repository repository = new Repository(); 
 		 repository.setOwner(new User().setLogin(client.getUser())); 
-		 repository.setName("test-create-" + System.currentTimeMillis()); 
+		 repository.setName("TEMP-REPRO-" + System.currentTimeMillis()); 
 		 repository.setPrivate(true); 
 		 
 		 Repository created = service.createRepository(repository); 
