@@ -81,7 +81,7 @@ public class TESTGITHUBAPI
 	 @Test 
 	 public void fetchRepositories() throws IOException 
 	 { 
-		 assertNotNull("Client user is required", client.getUser()); 
+		 assertNotNull("Client test user is required", client.getUser()); 
 
 		 RepositoryService service = new RepositoryService(client); 
 		 List<Repository> repos = service.getRepositories("corryco"); 
