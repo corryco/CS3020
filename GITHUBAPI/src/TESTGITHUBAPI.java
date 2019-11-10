@@ -1,3 +1,7 @@
+// @author Conor Corry
+// Course CS3012 - Task 3. GITHUB API
+// Date: NOV 2019
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.Before; 
@@ -28,22 +32,6 @@ public class TESTGITHUBAPI
 		client = new GitHubClient();
 		client.setCredentials("corryco", "Uaz9401CC");
 	}
-
-	@Test 
-	public void fetchCurrentUserUserPWD() throws Exception 
-	{ 
-		client = null;
-		assertNotNull("Test requires user", client.getUser()); 
-
-		UserService service = new UserService(client); 
-		User user = service.getUser(); 
-		assertNotNull(user); 
-		assertEquals(client.getUser(), user.getLogin()); 
-		assertNotNull(user.getGravatarId()); 
-		assertNotNull(user.getAvatarUrl()); 
-		assertNotNull(user.getCreatedAt()); 
-		assertNotNull(user.getPlan()); 
-	 } 
 	 
 	@Test 
 	public void fetchCurrentUserToken() throws Exception 
@@ -54,6 +42,21 @@ public class TESTGITHUBAPI
 		UserService service = new UserService(tokclient); 
 		User user = service.getUser(); 
 		assertNotNull(user); 
+		assertNotNull(user.getGravatarId()); 
+		assertNotNull(user.getAvatarUrl()); 
+		assertNotNull(user.getCreatedAt()); 
+		assertNotNull(user.getPlan()); 
+	 } 
+
+	@Test 
+	public void fetchCurrentUserUserPWD() throws Exception 
+	{ 
+		assertNotNull("Test requires user", client.getUser()); 
+
+		UserService service = new UserService(client); 
+		User user = service.getUser(); 
+		assertNotNull(user); 
+		assertEquals(client.getUser(), user.getLogin()); 
 		assertNotNull(user.getGravatarId()); 
 		assertNotNull(user.getAvatarUrl()); 
 		assertNotNull(user.getCreatedAt()); 
