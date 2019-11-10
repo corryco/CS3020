@@ -17,3 +17,5 @@ Create sample data and also to identify the basic API for your solution.
 Build initial solution, testing it against your test code until it is working.
 
 Refine the solution, expanding the test cases to deal with awkward parameters and edge cases that push the limits of the solution, enhancing your solution to deal with these. 
+
+Task 3. GitHub Access - Interrogate the GitHub API to retrieve and display data regarding the logged in developer.
